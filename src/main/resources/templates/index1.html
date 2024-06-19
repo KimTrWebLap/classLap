@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width:1024px;
+            margin: 0px;
+        }
+        #header{
+            background-color: rgb(255 , 255, 255);
+            width:1024px;
+            height: 80px;
+      /*      padding-left: 20px;*/
+            text-align: center;
+            
+        }
+        #header #header_div{
+            text-align: center;
+            width: 100%;
+            display: block;
+          /*  background-color: aqua;*/
+        }
+      
+        #header #header_div #header_div_input{
+            width: 76%;
+            text-align: right;
+        }
+        #header #header_div #header_div_img{
+            margin-top: 3px;
+        }
+        div{
+            
+          /*  display: inline-block;*/
+            float: left;
+            overflow: hidden;   /* 세로로 늘어 나는것 */
+            box-sizing:border-box; /* 가로로 늘어 나는 것 */
+        }
+        span{
+            width:100px;
+            height: 100px;
+            background-color: blue;
+        }
+        #nav{  /*의미는 메뉴 */
+            width : 1024px;
+            height: 40px;
+         /*   background-color: rgb(183, 179, 179);
+          /*  border: solid 2px;*/
+            text-align: center;
+           /* padding-top: 10px;*/
+          /*  line-height: 50px;*/
+            margin-bottom: 20px;
+        }
+        #article{  /*홈페이지에서 주제를 표현할 영역 */
+            width : 860;
+         /*   background-color: green;*/
+           
+        }
+        #nav2{  /*의미는 메뉴 */
+            width : 170px;
+            height: 400px;
+        /*    background-color: gray;*/
+        }
+        
+        #footer{  /*의미는 회사정보, 개발정보 */
+            width : 1024px;
+            height: 50px;
+           /* background-color: gray;*/
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid black;
+        } 
+        h1{
+            /*border: solid 2px;*/
+            font-size: 16px;
+           /* margin-left: 30px;*/
+        }
+        ul li{  /* ul 태그 자식 중에 li태그를 선택함  
+                 li 태그의 기본 display:block*/
+            display: inline-block; /* 옆으로 배열 / 가로세로크기 조절 */
+            
+         /*   border: solid 1px;*/
+            width: 80px;
+       /*     background-color: rgb(209, 209, 178);*/
+            text-align: center;
+
+        }
+        ul{
+            margin: 8px ;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul li:hover{
+            background-color: aqua;
+        }
+        .nav2div{  /*class속성으로 선택하기 */
+            display: block;
+            width:100%;
+          /*  background-color: aqua;*/
+            margin: 10px 10px 0px 0px;
+            padding: 5px;
+            text-align: center;
+
+        }
+        table{            
+            font-size: 14px;
+        }
+        
+
+        #header input[type=text] {
+	        width: 500px;
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            margin-bottom:  10px;
+            background-color: rgb(233, 233, 233);
+        }
+
+        section{
+            display: inline-block;
+            width:280px;
+            background-color: wheat;
+            height: 500px;
+            padding: 10px;
+            overflow: hidden;   /* 세로로 늘어 나는것 */
+            box-sizing:border-box; /* 가로로 늘어 나는 것 */
+        }
+        #info{
+            display: inline-block;
+            position: fixed;
+            width:100px;
+            height: 50px;
+            margin-left: 850px;
+            margin-top : 90px;
+         /*   background-color: red;*/
+        }
+
+    </style>
+    <script>
+        function c(i){
+            var a = document.getElementsByTagName("div")[i];
+            a.style.backgroundColor="green";
+        }
+    </script>
+</head>
+<body>
+    <div id="info">
+        User : Guest
+    </div>   
+    <div id="header">
+        <h1> 휴먼 프로그래머스</h1>
+        <div id="header_div"> 
+            <div id="header_div_input">
+                <input type=text>
+            </div>
+            <div id="header_div_img">
+                <img src="./img/search.PNG">
+            </div>
+        </div>
+    </div> 
+    <div id="nav">
+        <ul>   <!-- 메뉴는 목록 태그로 이용해서 만들어 보자.-->
+            <li> <a href="#">Home</a></li>
+            <li> <a href="#">사진첩</a> </li>
+            <li> 강의 </li>  
+            <li> 게시판 </li>   
+        </ul>
+    </div>
+    <div id="article">
+        <section>
+            <div>
+                <h2> 화서 먹자 골목</h2>
+                <p>
+                    화서역 먹자 골목은 칼국수, 해물요리, 닭갈비 등의 요리가 있다.
+
+                </p>
+                <p>
+                     주차 자리는 협소한 편이며 근처 공원을 이용하는 것을 추천한다. 가족단위로
+                     많이 이용하고 있으며 조용하면서도 활기찬 분위기를 형성하고 있다. 
+
+                </p>
+
+            </div>
+        </section>
+        
+        <section>
+            <div>
+                <h2> 화서 먹자 골목</h2>
+                <p>
+                    화서역 먹자 골목은 칼국수, 해물요리, 닭갈비 등의 요리가 있다.
+
+                </p>
+                <p>
+                     주차 자리는 협소한 편이며 근처 공원을 이용하는 것을 추천한다. 가족단위로
+                     많이 이용하고 있으며 조용하면서도 활기찬 분위기를 형성하고 있다. 
+
+                </p>
+
+            </div>
+        </section>
+        <section>
+            <div>
+                <h2> 화서 먹자 골목</h2>
+                <p>
+                    화서역 먹자 골목은 칼국수, 해물요리, 닭갈비 등의 요리가 있다.
+
+                </p>
+                <p>
+                     주차 자리는 협소한 편이며 근처 공원을 이용하는 것을 추천한다. 가족단위로
+                     많이 이용하고 있으며 조용하면서도 활기찬 분위기를 형성하고 있다. 
+
+                </p>
+
+            </div>
+        </section>
+    </div>
+    <div id="nav2">
+        <div class="nav2div">
+            <table>
+                <tr>
+                    <td>
+                        ID
+                    </td>
+                    <td>
+                        <input type="text" size="10">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        PASS
+
+                    </td>
+                    <td>
+                        <input type="password" size="10">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <input type="button" value="Login" >
+                        <input type="button" value="Join">
+                    </td>
+                </tr>
+
+            </table>
+                      
+        </div>
+        <div class="nav2div">Top10 검색어
+            <table >
+                <tr align="left">
+                    <td >
+                        1. java <br>
+                        2. html <br>
+                        3. oracle <br>
+
+                    </td>
+
+                </tr>
+
+
+            </table>
+
+
+
+        </div>
+    </div>
+    <div id="footer"> KimTeacher Human Academy</div>
+
+</body>
+</html>
