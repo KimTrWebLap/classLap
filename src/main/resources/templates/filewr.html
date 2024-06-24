@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h2>파일 업로드</h2>
+	
+        <form action="/upload" method="post" enctype="multipart/form-data">
+     	  
+           <h4>단일 파일 업로드</h4>
+           <input type="file" name="file">
+                   	
+           <h4>다중 파일 업로드</h4>
+           <input type="file" multiple="multiple" name="files">
+			
+	   <input type="submit"/>
+	</form>
+</body>
+</html>
+<!-- https://velog.io/@nestour95/Spring-Boot-Form-%EC%9C%BC%EB%A1%9C-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%ED%95%98%EA%B8%B0 -->
