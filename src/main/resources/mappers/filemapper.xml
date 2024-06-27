@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.classLap.demo.dao.IF_FileEntityDAO">
+	<insert id="insert" parameterType="com.classLap.demo.vo.FileEntity">
+		insert into FileEntity values (default, #{originName}, #{saveName},#{savePath})		
+	</insert>
+	<select id="selectall" resultType="com.classLap.demo.vo.FileEntity">
+		select * from FileEntity where id=#{id}
+	</select>
+</mapper>

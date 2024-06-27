@@ -1,12 +1,15 @@
 package com.classLap.demo.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.classLap.demo.dao.IF_FileEntityDAO;
+import com.classLap.demo.vo.FileEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +21,10 @@ public class FileService {
     private String fileDir;
 
     //private final FileRepository fileRepository;
+	@Autowired
+	private IF_FileEntityDAO fileEntitydao;
 
-    public Long saveFile(MultipartFile files) throws IOException {
+    public Long saveFile(MultipartFile files) throws Exception {
         if (files.isEmpty()) {
             return null;
         }
@@ -42,6 +47,8 @@ public class FileService {
                 .savedPath(savedPath)
                 .build();
 */
+        FileEntity file = new FileEntity(origName, savedName, savedPath);
+        fileEntitydao.insert(file);
         // 실제로 로컬에 uuid를 파일명으로 저장
         files.transferTo(new File(savedPath));
 /*

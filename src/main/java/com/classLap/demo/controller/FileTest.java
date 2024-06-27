@@ -1,14 +1,13 @@
 package com.classLap.demo.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.http.HttpHeaders;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.tomcat.util.file.ConfigurationSource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.UrlResource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,19 +17,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.util.UriUtils;
 
+import com.classLap.demo.dao.IF_FileEntityDAO;
 import com.classLap.demo.service.FileService;
+import com.classLap.demo.vo.FileEntity;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class FileTest {
 
 	private final FileService fileService;
 
+	@Value("${file.dir}")
+    private String fileDir;
+
 	@Autowired
 	public FileTest(FileService fileService) {
 		this.fileService = fileService;
 	}
+	@Autowired
+	private IF_FileEntityDAO fileEntitydao;
 
 	@GetMapping("/upload")
 	public String bbs() {
@@ -40,7 +47,7 @@ public class FileTest {
 
 	@PostMapping("/upload")
 	public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("files") List<MultipartFile> files)
-			throws IOException {
+			throws Exception {
 		fileService.saveFile(file);
 		System.out.println("aaa");
 		for (MultipartFile multipartFile : files) {
@@ -50,29 +57,36 @@ public class FileTest {
 		return "redirect:/";
 	}
 
-	@GetMapping("/view")
-	public String view(Model model) {
+	@GetMapping("/fileview")
+	public String view(Model model) throws Exception {
 
-		// List<FileEntity> files = fileRepository.findAll();
-		// model.addAttribute("all",files);
-		return "view";
+		List<FileEntity> files = fileEntitydao.selectAll(14L);
+		model.addAttribute("all",files);
+		return "fileview";
 	}
 
 	// 이미지 출력
-	@GetMapping("/images/{fileId}")
+	@GetMapping("/images/{fileId}")  //cors에러??
 	@ResponseBody
-	public Resource downloadImage(@PathVariable("fileId") Long id, Model model) throws IOException {
+	public FileSystemResource downloadImage(@PathVariable("fileId") Long id, Model model, HttpServletResponse response) throws IOException {
 
 		// FileEntity file = fileRepository.findById(id).orElse(null);
-		// return new UrlResource("file:" + file.getSavedPath());
-		return null;
+		System.out.println(id);
+		File file = new File(fileDir + "/" + id);
+		response.setContentType("application/download; utf-8");
+		response.setHeader("Content-Disposition", "attachment; filename=" + id);
+		return new FileSystemResource(file);
+	//	return new UrlResource("file:" + id);
+	//	return null;
 	}
+
 
 	// 첨부 파일 다운로드
 	@GetMapping("/attach/{id}")
-	public ResponseEntity<Resource> downloadAttach(@PathVariable Long id) throws MalformedURLException {
+	public ResponseEntity<Resource> downloadAttach(@PathVariable Long id) throws Exception {
 
 		// FileEntity file = fileRepository.findById(id).orElse(null);
+	//	FileEntity file = fileEntitydao.selectAll(id);
 
 	//	UrlResource resource = new UrlResource("file:" + file.getSavedPath());
 
